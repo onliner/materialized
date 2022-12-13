@@ -22,7 +22,7 @@ class FormatFactory
                     throw new InvalidArgumentException('Materialize AVRO format "connection" config required');
                 }
 
-                if (isset($config['options']) || !is_array($config['options'])) {
+                if (isset($config['options']) && !is_array($config['options'])) {
                     throw new InvalidArgumentException('Materialize AVRO format "options" config must be array');
                 }
 
@@ -49,7 +49,7 @@ class FormatFactory
                     throw new InvalidArgumentException('Materialize Protobuf format "connection" config required');
                 }
 
-                if (isset($config['options']) || !is_array($config['options'])) {
+                if (isset($config['options']) && !is_array($config['options'])) {
                     throw new InvalidArgumentException('Materialize Protobuf format "options" config must be array');
                 }
 
