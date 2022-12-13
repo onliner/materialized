@@ -1,0 +1,26 @@
+{
+    "name": "onliner/materialized",
+    "type": "library",
+    "description": "PHP abstraction level for Materialized database",
+    "keywords": ["cdc", "pdo", "materialized"],
+    "license": "MIT",
+    "require": {
+        "php": "^7.2 || ^8.0",
+        "ext-pdo": "*",
+        "psr/log": "^1.1 || ^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5 || ^9.0",
+        "phpstan/phpstan": "^1.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Onliner\\Materialized\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Onliner\\Materialized\\Tests\\": "tests"
+        }
+    }
+}
