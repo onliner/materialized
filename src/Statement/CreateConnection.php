@@ -42,11 +42,14 @@ class CreateConnection implements Command
     public static function kafka(string $name, string ...$brokers): self
     {
         if (count($brokers) > 1) {
-            $definition = sprintf('KAFKA (BROKERS (%s))', implode(', ', array_map(static function (string $dsn) {
-                return sprintf('\'%s\'', $dsn);
-            }, $brokers)));
+            $definition = sprintf(
+                "KAFKA (BROKERS (%s), SECURITY PROTOCOL = 'PLAINTEXT')",
+                implode(', ', array_map(static function (string $dsn) {
+                    return sprintf('\'%s\'', $dsn);
+                }, $brokers))
+            );
         } else {
-            $definition = sprintf('KAFKA (BROKER \'%s\')', current($brokers));
+            $definition = sprintf("KAFKA (BROKER '%s', SECURITY PROTOCOL = 'PLAINTEXT')", current($brokers));
         }
 
         return new self($name, $definition);

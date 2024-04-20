@@ -20,11 +20,6 @@ class CreateSource implements Command
     private $definition;
 
     /**
-     * @var string
-     */
-    private $size = '1';
-
-    /**
      * @var bool
      */
     private $strict = false;
@@ -72,18 +67,6 @@ class CreateSource implements Command
     }
 
     /**
-     * @param string $size
-     *
-     * @return self
-     */
-    public function size(string $size): self
-    {
-        $this->size = $size;
-
-        return $this;
-    }
-
-    /**
      * @return self
      */
     public function strict(): self
@@ -106,8 +89,8 @@ class CreateSource implements Command
             $query .= ' IF NOT EXISTS';
         }
 
-        $query .= ' %s FROM %s WITH (SIZE = \'%s\')';
+        $query .= ' %s FROM %s';
 
-        return sprintf($query, $this->name, $this->definition, $this->size);
+        return sprintf($query, $this->name, $this->definition);
     }
 }

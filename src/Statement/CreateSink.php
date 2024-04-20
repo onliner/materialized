@@ -109,8 +109,8 @@ class CreateSink implements Command
             $query .= ' IF NOT EXISTS';
         }
 
-        $query .= ' %s FROM %s INTO %s WITH (SIZE = \'%s\')';
+        $query .= ' %s FROM %s INTO %s';
 
-        return sprintf($query, $this->name, $this->from, $this->definition, $this->size);
+        return sprintf($query, $this->name, $this->from, $this->definition);
     }
 }
