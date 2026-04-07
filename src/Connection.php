@@ -47,7 +47,7 @@ class Connection
      *
      * @return self
      */
-    public static function open(string $url, LoggerInterface $logger = null): self
+    public static function open(string $url, ?LoggerInterface $logger = null): self
     {
         $parts = array_replace(self::DEFAULTS, array_filter(parse_url($url) ?: []));
         $dsn = sprintf(self::DSN_TEMPLATE, $parts['host'], $parts['port'], trim((string) $parts['path'], '/'));

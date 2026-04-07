@@ -62,7 +62,7 @@ class CreateSink implements Command
         string $connection,
         string $topic,
         array $keys = [],
-        Envelope $envelope = null
+        ?Envelope $envelope = null
     ): self {
         $envelope = $envelope ?? Envelope::default();
         $definition = sprintf('KAFKA CONNECTION %s (TOPIC \'%s\') ', $connection, $topic);
