@@ -42,7 +42,7 @@ class CreateSource implements Command
      *
      * @return self
      */
-    public static function kafka(string $name, string $connection, string $topic, Envelope $envelope = null): self
+    public static function kafka(string $name, string $connection, string $topic, ?Envelope $envelope = null): self
     {
         $envelope = $envelope ?? Envelope::default();
         $definition = sprintf('KAFKA CONNECTION %s (TOPIC \'%s\') ', $connection, $topic);
