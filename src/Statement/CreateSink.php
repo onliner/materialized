@@ -62,7 +62,7 @@ class CreateSink implements Command
         string $connection,
         string $topic,
         array $keys = [],
-        Envelope $envelope = null
+        ?Envelope $envelope = null
     ): self {
         $envelope = $envelope ?? Envelope::default();
         $definition = sprintf('KAFKA CONNECTION %s (TOPIC \'%s\') ', $connection, $topic);
@@ -109,8 +109,8 @@ class CreateSink implements Command
             $query .= ' IF NOT EXISTS';
         }
 
-        $query .= ' %s FROM %s INTO %s WITH (SIZE = \'%s\')';
+        $query .= ' %s FROM %s INTO %s';
 
-        return sprintf($query, $this->name, $this->from, $this->definition, $this->size);
+        return sprintf($query, $this->name, $this->from, $this->definition);
     }
 }

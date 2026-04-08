@@ -20,11 +20,6 @@ class CreateSource implements Command
     private $definition;
 
     /**
-     * @var string
-     */
-    private $size = '1';
-
-    /**
      * @var bool
      */
     private $strict = false;
@@ -47,7 +42,7 @@ class CreateSource implements Command
      *
      * @return self
      */
-    public static function kafka(string $name, string $connection, string $topic, Envelope $envelope = null): self
+    public static function kafka(string $name, string $connection, string $topic, ?Envelope $envelope = null): self
     {
         $envelope = $envelope ?? Envelope::default();
         $definition = sprintf('KAFKA CONNECTION %s (TOPIC \'%s\') ', $connection, $topic);
@@ -69,18 +64,6 @@ class CreateSource implements Command
         $definition .= empty($tables) ? ' FOR ALL TABLES' : sprintf(' FOR TABLES (%s)', implode(',', $tables));
 
         return new self($name, $definition);
-    }
-
-    /**
-     * @param string $size
-     *
-     * @return self
-     */
-    public function size(string $size): self
-    {
-        $this->size = $size;
-
-        return $this;
     }
 
     /**
@@ -106,8 +89,8 @@ class CreateSource implements Command
             $query .= ' IF NOT EXISTS';
         }
 
-        $query .= ' %s FROM %s WITH (SIZE = \'%s\')';
+        $query .= ' %s FROM %s';
 
-        return sprintf($query, $this->name, $this->definition, $this->size);
+        return sprintf($query, $this->name, $this->definition);
     }
 }
